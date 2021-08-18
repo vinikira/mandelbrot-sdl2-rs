@@ -113,11 +113,17 @@ pub fn main() {
             game_state.canvas_size as u32,
             game_state.canvas_size as u32,
         )
+        .opengl()
         .position_centered()
         .build()
         .unwrap();
 
-    let mut canvas: WindowCanvas = window.into_canvas().accelerated().build().unwrap();
+    let mut canvas: WindowCanvas = window
+        .into_canvas()
+        .accelerated()
+        .present_vsync()
+        .build()
+        .unwrap();
 
     game_state.rainbow_colors();
 
