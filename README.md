@@ -1,19 +1,19 @@
 # Mandelbrot SDL2 Rust
 
-A mandelbrot test with rust and SDL2.
+A mandelbrot render with rust and SDL2.
 
 ## Running
 With rust installed just run (recommended use release option for better performance): 
 
-``` shell
+``` console
 cargo run --release
 ```
 
 ## Keys
-| key        | description              |
-|------------|--------------------------|
-| a          | zoom in                  |
-| s          | zoom out                 |
-| arrow keys | move the cartesian plane |
-| r          | reset mandelbrot         |
-| esc        | exit application         |
+| key                                                         | description              |
+|-------------------------------------------------------------|--------------------------|
+| <kbd>a</kbd>                                                | zoom in                  |
+| <kbd>s</kbd>                                                | zoom out                 |
+| <kbd>up</kbd><kbd>down</kbd><kbd>left</kbd><kbd>right</kbd> | move the cartesian plane |
+| <kbd>r</kbd>                                                | reset mandelbrot         |
+| <kbd>esc</kbd>                                              | exit application         |
