@@ -22,6 +22,7 @@ struct GameState {
     magnification_value: f64,
     pan_x: f64,
     pan_y: f64,
+    zoom_level: usize,
 }
 
 impl GameState {
@@ -98,11 +99,13 @@ impl Default for GameState {
             magnification_value: 800f64,
             pan_x: 0f64,
             pan_y: 0f64,
+            zoom_level: 1,
         }
     }
 }
 
 pub fn main() {
+    const ZOOM_FACTOR: f64 = 0.05;
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
     let mut game_state = GameState::default();
@@ -144,37 +147,39 @@ pub fn main() {
                     keycode: Some(Keycode::Left),
                     ..
                 } => {
-                    game_state.pan_x += 0.05f64;
+                    game_state.pan_x += ZOOM_FACTOR / game_state.zoom_level as f64;
                 }
                 Event::KeyDown {
                     keycode: Some(Keycode::Right),
                     ..
                 } => {
-                    game_state.pan_x -= 0.05f64;
+                    game_state.pan_x -= ZOOM_FACTOR / game_state.zoom_level as f64;
                 }
                 Event::KeyDown {
                     keycode: Some(Keycode::Up),
                     ..
                 } => {
-                    game_state.pan_y += 0.05f64;
+                    game_state.pan_y += ZOOM_FACTOR / game_state.zoom_level as f64;
                 }
                 Event::KeyDown {
                     keycode: Some(Keycode::Down),
                     ..
                 } => {
-                    game_state.pan_y -= 0.05f64;
+                    game_state.pan_y -= ZOOM_FACTOR / game_state.zoom_level as f64;
                 }
                 Event::KeyDown {
                     keycode: Some(Keycode::A),
                     ..
                 } => {
                     game_state.magnification_value += 100f64;
+                    game_state.zoom_level += 1;
                 }
                 Event::KeyDown {
                     keycode: Some(Keycode::S),
                     ..
                 } => {
                     game_state.magnification_value -= 100f64;
+                    game_state.zoom_level -= 1;
                 }
                 Event::KeyDown {
                     keycode: Some(Keycode::R),
