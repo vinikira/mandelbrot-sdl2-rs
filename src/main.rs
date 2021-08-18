@@ -18,7 +18,7 @@ use std::time::Duration;
 struct GameState {
     canvas_size: usize,
     max_iterations: usize,
-    colours: Vec<Color>,
+    colors: Vec<Color>,
     magnification_value: f64,
     pan_x: f64,
     pan_y: f64,
@@ -33,7 +33,7 @@ impl GameState {
             (((s * 127.0) + 128.0).floor()) as u8
         };
 
-        self.colours = (0..c as u32)
+        self.colors = (0..c as u32)
             .map(|i| {
                 Color::RGBA(
                     sin_to_dec(i, 0.0 * PI * 2.0 / 3.0),
@@ -77,7 +77,7 @@ impl GameState {
             let x = (n as u32) - (y * self.canvas_size as u32);
 
             let color = if iterations < self.max_iterations as u8 {
-                self.colours[iterations as usize]
+                self.colors[iterations as usize]
             } else {
                 Color::RGB(0, 0, 0)
             };
@@ -94,7 +94,7 @@ impl Default for GameState {
         GameState {
             canvas_size: 800,
             max_iterations: 60,
-            colours: vec![],
+            colors: vec![],
             magnification_value: 800f64,
             pan_x: 0f64,
             pan_y: 0f64,
