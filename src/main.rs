@@ -185,9 +185,8 @@ pub fn main() {
                     keycode: Some(Keycode::R),
                     ..
                 } => {
-                    game_state.magnification_value = 800f64;
-                    game_state.pan_x = 0f64;
-                    game_state.pan_y = 0f64;
+                    game_state = GameState::default();
+                    game_state.rainbow_colors();
                 }
                 _ => {}
             }
