@@ -8,7 +8,11 @@ use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
 use sdl2::rect::Point;
+
 use sdl2::render::WindowCanvas;
+use std::f64::consts::PI;
+
+use std::thread::sleep;
 use std::time::Duration;
 
 struct GameState {
@@ -25,16 +29,16 @@ impl GameState {
         let c = self.max_iterations;
 
         let sin_to_dec = |i: u32, phase: f64| -> u8 {
-            let s = (std::f64::consts::PI / (c as f64) * 2.0 * (i as f64) + phase).sin();
+            let s = (PI / (c as f64) * 2.0 * (i as f64) + phase).sin();
             (((s * 127.0) + 128.0).floor()) as u8
         };
 
         self.colours = (0..c as u32)
             .map(|i| {
                 Color::RGBA(
-                    sin_to_dec(i, 0.0 * std::f64::consts::PI * 2.0 / 3.0),
-                    sin_to_dec(i, 2.0 * std::f64::consts::PI * 2.0 / 3.0),
-                    sin_to_dec(i, 1.0 * std::f64::consts::PI * 2.0 / 3.0),
+                    sin_to_dec(i, 0.0 * PI * 2.0 / 3.0),
+                    sin_to_dec(i, 2.0 * PI * 2.0 / 3.0),
+                    sin_to_dec(i, 1.0 * PI * 2.0 / 3.0),
                     255,
                 )
             })
@@ -180,6 +184,6 @@ pub fn main() {
 
         game_state.render(&mut canvas);
         canvas.present();
-        ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 60));
+        sleep(Duration::new(0, 1_000_000_000u32 / 60));
     }
 }
